@@ -12,6 +12,18 @@ function go() {
 }
 
 const { t } = useI18n()
+
+const showNotification = async () => {
+  // 请求授权
+  await notification.requestPermission()
+
+   // 发送通知
+  notification.sendNotification({
+    title: '通知标题',
+    body: '通知内容',
+    icon: 'path/to/icon.png'
+  })
+}
 </script>
 
 <template>
@@ -30,21 +42,15 @@ const { t } = useI18n()
 
     <div py-4 />
 
-    <TheInput
-      v-model="name"
-      :placeholder="t('intro.whats-your-name')"
-      autocomplete="false"
-      @keydown.enter="go"
-    />
+    <TheInput v-model="name" :placeholder="t('intro.whats-your-name')" autocomplete="false" @keydown.enter="go" />
     <label class="hidden" for="input">{{ t('intro.whats-your-name') }}</label>
 
     <div>
-      <button
-        m-3 text-sm btn
-        :disabled="!name"
-        @click="go"
-      >
+      <button m-3 text-sm btn :disabled="!name" @click="go">
         {{ t('button.go') }}
+      </button>
+      <button m-3 text-sm btn :disabled="!name" @click="showNotification">
+        发起通知
       </button>
     </div>
   </div>

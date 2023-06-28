@@ -50,6 +50,14 @@ export default defineConfig({
         'vue-i18n',
         '@vueuse/head',
         '@vueuse/core',
+        {
+          '@tauri-apps/api': [
+            'invoke',
+            'tauri',
+            'app',
+            'notification',
+          ]
+        }
       ],
       dts: 'src/auto-imports.d.ts',
       dirs: [
